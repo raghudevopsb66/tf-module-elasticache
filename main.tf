@@ -40,3 +40,8 @@ resource "aws_security_group" "main" {
   }
 }
 
+resource "aws_ssm_parameter" "elasticache" {
+  name  = "mutable.elasticache.${var.env}.REDIS_HOST"
+  type  = "String"
+  value = aws_elasticache_cluster.main.cache_nodes[0].address
+}
